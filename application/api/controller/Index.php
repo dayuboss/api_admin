@@ -11,9 +11,12 @@ class Index extends Base
         $id = $this->request->param('id');
         if (!$id) {
             return $this->buildFailed('id参数为空',ReturnCode::PARAM_INVALID);
+
         } else {
-            return $this->buildSuccess(['name' => '张山']);
+            $data = $this->app->model('admin_app')->find($id);
+            return $this->buildSuccess($data);
         }
+
     }
 
     public function add()

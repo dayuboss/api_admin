@@ -11,7 +11,7 @@ namespace app\util;
 
 class Strs
 {
-    /*
+    /**
      * 随机生成一个唯一字符串
      * */
     static public function keyGen()

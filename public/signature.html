@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        app_id:<input name="app_id" type="text"><br/>
+        app_secret:<input name="app_secret" type="text"><br/>
+        device_id:<input name="device_id" type="text"><br/>
+        <button type="button" onclick="signature()">签名</button>
+        <h3 id="signature"></h3>
+    </div>
+</body>
+<script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="static/js/md5.min.js"></script>
+    <script>
+        function signature() {
+            var app_id = document.getElementsByClassName('app_id').value;
+            var app_secret = document.getElementsByClassName('app_secret').value;
+            var device_id = document.getElementsByClassName('device_id').value;
+
+            var param_str = 'app_id='+app_id+'&app_secret='+app_secret+'&device_id='+device_id;
+
+            var signature =md5(param_str);
+
+            $("#signature").html(signature);
+        }
+    </script>
+</html>

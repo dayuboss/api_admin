@@ -20,6 +20,7 @@ class ReturnCode
 
     const PARAM_INVALID = -995; //http参数无效
     const EMPTY_PARAMS = -12;//缺失参数
+    const ACCESS_TOKEN_TIMEOUT = -30; //token过期
 
     const DELETE_FAILED = -20; //删除失败
     const ADD_FAILED = -21;//添加失败

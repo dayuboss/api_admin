@@ -36,7 +36,7 @@ class BuildToken extends Base
         unset($param['signature']);
         $sign = $this->getAuthToken($app_info->app_secret, $param);
 
-        if ($sign !== $signature) {
+        if ($sign!== $signature) {
             return $this->buildFailed(ReturnCode::INVALID, '身份令牌验证失败!');
         }
 
@@ -50,14 +50,17 @@ class BuildToken extends Base
         //获取缓存的token
         $accessToken = cache('AccessToken:' . $param['device_id']);
 
+        //把缓存的token设置为空
         if ($accessToken) {
             cache('AccessToken:' . $accessToken, null);
             cache('AccessToken' . $param['device_id'], null);
         }
+        //创建新的token
         $accessToken = $this->buildAccessToken($app_info->app_id, $app_info->app_secret);
 
         $app_info->device_id = $param->device_id;
 
+        //再缓存其token即设备的Id
         cache('AccessToken' . $accessToken, $app_info, $expires); //缓存token的位置
         cache('AccessToken' . $param['device_id'], $accessToken, $expires);//
 
@@ -67,6 +70,12 @@ class BuildToken extends Base
         return $this->buildSuccess($result);
     }
 
+    /**
+     * 构建token
+     * @param $app_id
+     * @param $app_secret
+     * @return string
+     */
     private function buildAccessToken($app_id, $app_secret)
     {
         $preStr = $app_secret . $app_id . time() . Strs::keyGen();

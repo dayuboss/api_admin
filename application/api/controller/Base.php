@@ -47,12 +47,8 @@ class Base extends Controller
      */
     private function buildReturn($code,$msg,$data)
     {
-
-        $result = [
-            'code' => $code,
-            'msg' => $msg,
-            'data' => $data
-        ];
-        return json($result);
+    return $this->result($data,$code,$msg,'json');
     }
+
+
 }
